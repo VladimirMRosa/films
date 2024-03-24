@@ -1,0 +1,148 @@
+openapi: 3.0.1
+info:
+  title: API Star Wars
+  description: API para listar filmes da saga Stars Wars.
+  version: 0.0.1
+  termsOfService: https://swapi.info
+  contact:
+    name: Suporte a Dev
+    email: vladimir_marques_ros@hotmail.com
+    url: https://www.linkedin.com/in/vladimir-marques-da-rosa-120b2341/
+  license:
+    name: "Licença GPLv3"
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: Documentacao base referencia
+  url: https://swapi.info/api/films
+servers: 
+- url: https://65ff0377df565f1a6144a483.mockapi.io/
+  description: API Mock
+tags:
+ - name: Films
+   description: Tudo sobre seus Filmes
+ - name: People
+   description: Tudo sobre seus Persogens
+paths:
+ /Films:
+  get:
+    tags:
+     - Films
+    summary: Listar os filmes da saga
+    responses:
+      200:
+       description: Sucesso
+       content:
+        application/json:
+         schema:
+           type: array
+           items:
+            $ref: "#/components/schemas/Films"
+  put: 
+   tags:
+     - Films
+   summary: Alterar a descrição de um filme
+   description: Alterar a descrição existente pelo id
+   requestBody:
+    content:
+     application/json:
+      schema:
+       $ref: "#/components/schemas/AtualizarFilmDto"
+   responses:
+    '200':
+      description: Sucesso
+      content:
+        application/json:
+          schema:
+                $ref: "#/components/schemas/Film"          
+    '400':
+      description: ID Invalido
+    '404':
+      description: Filme nao encontrado
+    '422':
+      description: Validation exception
+       
+ /Films/{epsisode_id}:
+  get:
+    tags:
+     - Films
+    summary: Exibir detalhes de um filme
+    operationId: getEpsisodeID
+    parameters: 
+    - name: epsisode_id
+      in: path
+      description: ID do film
+      required: true
+      schema: 
+       type: integer
+       format: int64
+    responses:
+     '200':
+       description: Sucesso
+       content:
+        application/json:
+         schema:
+          $ref: '#/components/schemas/Film'
+     '400':
+      description:  ID Invalido
+     '404':
+      description: Filme nao encontrado
+
+components:
+  schemas:
+    Films:
+     type: array
+     items: 
+       $ref: "#/components/schemas/Film"
+    Film:
+     type: object
+     properties:
+      episode_id:
+       type: integer
+      title:
+       type: string
+      opening_crawl:
+       type: string
+      release_date:
+       type: string
+      characters:
+       type: array
+       items:
+        type: object
+      planets:
+       type: array
+       items:
+        type: object
+      starships:
+       type: array
+       items:
+        type: object
+      vehicles:
+       type: array
+       items:
+        type: object
+      species:
+       type: array
+       items:
+        type: object
+      created:
+       type: string
+       format: date-time
+      edited:
+       type: string
+       format: date-time
+      url:
+       type: string
+       format: uri
+       example: "https://swapi.info/api/films/1"
+    AtualizarFilmDto:
+     type: object
+     properties:
+      episode_id:
+       type: integer
+      opening_crawl:
+       type: string
+     
+    
+    
+    
+    
