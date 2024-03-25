@@ -2,7 +2,6 @@ package com.swapi.films.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.threeten.bp.OffsetDateTime;
 
 import java.util.List;
 
@@ -27,8 +26,8 @@ public class Film {
     List<Vehicles> vehicles = null;
     @OneToMany
     List<Species> species = null;
-    private OffsetDateTime created = null;
-    private OffsetDateTime edited = null;
+    private String created = null;
+    private String edited = null;
     private String url = null;
 
 

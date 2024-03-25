@@ -6,33 +6,42 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.OffsetDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public abstract class FilmsMapper {
 
     @Mapping(source = "titulo", target = "title")
+    @Mapping(source = "Planets", target = "Planets")
+    @Mapping(source = "Specie", target = "Species")
+    @Mapping(source = "Startship", target = "Starships")
+    @Mapping(source = "Vehicle", target = "Vehicles")
+    @Mapping(source = "planet", target = "planets")
+    @Mapping(source = "specie", target = "species")
+    @Mapping(source = "startship", target = "starships")
+    @Mapping(source = "vehicles", target = "vehicle")
     @Mapping(target = "created", source = "created", qualifiedByName = "startTime")
     @Mapping(target = "edited", source = "edited", qualifiedByName = "endTime")
-    @Mapping(target = "character",source = "character", qualifiedByName = "Character")
     public abstract List<Films> listarFilmes (List<com.swapi.films.domain.Films> response);
 
-    @Named("Character")
-    List<Character> chars = st.chars()
-            .mapToObj(e->(char)e).collect(Collectors.toList());
-
     @Named("startTime")
-    OffsetDateTime mapStartTime(Film startTime, @Context DateTimeFormatter dateTimeFormatter) {
-        return null;
+    OffsetDateTime mapStartTime(Film film, @Context DateTimeFormatter dateTimeFormatter) {
+        LocalDateTime localDateTime = LocalDateTime.parse(film.getCreated(), dateTimeFormatter);
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of(film.getCreated()));
+        return zonedDateTime.toOffsetDateTime();
     }
 
     @Named("endTime")
-    OffsetDateTime mapEndTime(Film endTime, @Context DateTimeFormatter dateTimeFormatter) {
-        return null;
+    OffsetDateTime mapEndTime(Film film, @Context DateTimeFormatter dateTimeFormatter) {
+        LocalDateTime localDateTime = LocalDateTime.parse(film.getEdited(), dateTimeFormatter);
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of(film.getEdited()));
+        return zonedDateTime.toOffsetDateTime();
     }
 
 }
