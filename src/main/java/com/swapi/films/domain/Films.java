@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Film")
+@Table(name = "Films")
 public class Films {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
