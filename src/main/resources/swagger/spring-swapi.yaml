@@ -169,14 +169,14 @@ paths:
         "400":
           description: "Invalid ID supplied"
         "404":
-          description: "Pet not found"
+          description: "Film not found"
 
     post:
       tags:
         - "swapi"
-      summary: "Updates a pet in the store with form data"
+      summary: "Updates a film in the store with form data"
       description: ""
-      operationId: "updatePetWithForm"
+      operationId: "updateFilmWithForm"
       consumes:
         - "application/x-www-form-urlencoded"
       produces:
@@ -184,18 +184,18 @@ paths:
       parameters:
         - name: "filmId"
           in: "path"
-          description: "ID of pet that needs to be updated"
+          description: "ID of film that needs to be updated"
           required: true
           type: "integer"
           format: "int64"
         - name: "name"
           in: "formData"
-          description: "Updated name of the pet"
+          description: "Updated name of the film"
           required: false
           type: "string"
         - name: "status"
           in: "formData"
-          description: "Updated status of the pet"
+          description: "Updated status of the film"
           required: false
           type: "string"
       responses:
@@ -227,13 +227,6 @@ definitions:
   Films:
     type: object
     properties:
-      films:
-        type: "array"
-        items:
-          $ref: '#/definitions/Film'
-  Film:
-    type: object
-    properties:
       episode_id:
         type: integer
       titulo:
@@ -245,65 +238,65 @@ definitions:
       characters:
         type: "array"
         items:
-          $ref: '#/definitions/Character'
+          $ref: '#/definitions/Characters'
       planets:
         type: "array"
         items:
-          $ref: '#/definitions/Planet'
+          $ref: '#/definitions/Planets'
       starships:
         type: "array"
         items:
-          $ref: '#/definitions/Starship'
+          $ref: '#/definitions/Starships'
       vehicules:
         type: "array"
         items:
-          $ref: '#/definitions/Vehicle'
+          $ref: '#/definitions/Vehicles'
       species:
         type: "array"
         items:
-          $ref: '#/definitions/Specie'
+          $ref: '#/definitions/Species'
       created:
         type: string
-        format: date-time
+        format: date
       edited:
         type: string
-        format: date-time
+        format: date
       url:
         type: string
         format: uri
         example: "https://swapi.info/api/films/1"
 
 
-  Vehicle:
+  Vehicles:
     type: object
     properties:
       vehicules:
         type: string
 
-  Specie:
+  Species:
     type: object
     properties:
-      specie:
+      species:
         type: string
 
-  Starship:
+  Starships:
     type: object
     properties:
-      starship:
-        type: string
-
-
-  Planet:
-    type: object
-    properties:
-      planet:
+      starships:
         type: string
 
 
-  Character:
+  Planets:
     type: object
     properties:
-      character:
+      planets:
+        type: string
+
+
+  Characters:
+    type: object
+    properties:
+      characters:
         type: string
 
   Tag:

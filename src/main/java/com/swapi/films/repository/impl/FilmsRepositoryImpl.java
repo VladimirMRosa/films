@@ -1,6 +1,5 @@
 package com.swapi.films.repository.impl;
 
-import com.swapi.films.domain.Film;
 import com.swapi.films.domain.Films;
 import com.swapi.films.repository.FilmsRepository;
 import lombok.extern.slf4j.Slf4j;

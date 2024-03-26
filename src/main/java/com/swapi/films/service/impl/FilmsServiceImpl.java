@@ -6,6 +6,7 @@ import com.swapi.films.service.FilmsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FilmsServiceImpl implements FilmsService {
@@ -18,5 +19,11 @@ public class FilmsServiceImpl implements FilmsService {
     @Override
     public List<Films> listarTodosOsFilmes() {
         return repository.findAll();
+    }
+
+    @Override
+    public Optional<Films> listarFilmePorId(Long filmId) {
+        Optional<Films> films = repository.findById(filmId);
+        return films;
     }
 }
